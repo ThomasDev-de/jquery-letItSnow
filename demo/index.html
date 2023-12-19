@@ -6,23 +6,50 @@
     <title>Bootstrap demo</title>
     <link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        .snowing {
+            width: 400px;
+            height: 400px;
+            margin: 20px;
+        }
+    </style>
 </head>
-<body class="h-100 d-flex justify-content-center align-items-center overflow-hidden">
-<h1 class="text-danger text-uppercase">Merry Christmas</h1>
+<body class="h-100">
+<div class="container h-100 d-flex flex-column align-items-sm-stretch">
+    <h1 class="text-center py-5">jQuery let it snow</h1>
+    <p class="text-center">In the examples, the bootstrap-icons framework used the snowflake (bi bi-snow2) as an entity
+        and the
+        background color Moonlight Blue (rgb(80,104,134)).</p>
+    <div class=" d-flex justify-content-center align-items-center overflow-hidden flex-fill">
+        <div class="snowing  shadow">
+
+        </div>
+        <div class="snowing shadow">
+
+        </div>
+        <div class="snowing shadow">
+
+        </div>
+    </div>
+    <a href="https://github.com/ThomasDev-de/jquery-letItSnow" class="py-5 d-block text-center">Back to the project</a>
+
+</div>
+
 <script src="../vendor/components/jquery/jquery.min.js"></script>
 <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../dist/jquery.letItSnow.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $('body').letItSnow({
-            background: "fixed no-repeat center bottom url('img/winter-landscape.png')",
-            quantity: 'less',
-            speed:1,
-            flake: {
-                html: '<i class="bi bi-snow3"></i>'
-            }
+    $(document).ready(function () {
+        $('.snowing').each(function (i, e) {
+            $(e).letItSnow({
+                background: " rgb(80,104,134)",
+                quantity: !i ? 'smooth' : (i === 1 ? 'less' : 'much'),
+                flake: {
+                    html: '<i class="bi bi-snow3"></i>',
+                }
+            });
         });
-    });
+    })
 
 </script>
 </body>

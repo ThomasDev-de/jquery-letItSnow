@@ -13,10 +13,10 @@
             quantity: "smooth", // smooth, less, medium or much
             flake: {
                 html: "&#x2022;", // Snow Entity
-                minSize: 8, // Minimum Flake Size
-                maxSize: 24, // Maximum Flake Size
+                minSize: 1, // Minimum Flake Size
+                maxSize: 7, // Maximum Flake Size
             },
-            colors: ["lightblue", "skyblue", "#DDDDDD", "#EEEEEE"], // Snowflake Colours
+            colors: ["#DDDDDD", "#EEEEEE"], // Snowflake Colours
             speed: 0.75, // Falling Velocity
             refresh: 50,
         };
