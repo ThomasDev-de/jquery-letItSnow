@@ -34,7 +34,6 @@
             });
 
         let amount = 0;
-        let marginBottom, marginRight;
 
         function getAmountOfSnowflakes() {
             let quantity;
@@ -86,16 +85,24 @@
             container.removeData("initSnowflakes");
         }
 
+        function getContainerSizes(){
+            const containerWidth = container.width() - 15;
+            const containerHeight = container.height() - 5;
+            return {
+                width: containerWidth,
+                height: containerHeight
+            }
+        }
+
         function initSnow() {
             const snowSize = setup.flake.maxSize - setup.flake.minSize;
-            marginBottom = container.height() - 5;
-            marginRight = container.width() - 15;
+            const sizes = getContainerSizes();
 
             for (let i = 0; i <= amount; i++) {
                 const flake = container.find(`[data-flake='${i}']`);
                 const size = randomise(snowSize) + setup.flake.minSize;
-                const posX = randomise(marginRight - size);
-                const posY = randomise(2 * marginBottom - marginBottom - 2 * size);
+                const posX = randomise(sizes.width - size);
+                const posY = randomise(2 * sizes.height - sizes.width - 2 * size);
 
                 let data = {
                     coords: 0,
@@ -124,11 +131,13 @@
         }
 
         function moveSnow() {
+            const sizes = getContainerSizes();
             for (let i = 0; i <= amount; i++) {
                 const flake = container.find(`[data-flake='${i}']`);
                 let data = flake.data("setup");
                 data.coords += data.pos;
                 data.posY += data.sink;
+
 
                 let left = data.posX + data.left * Math.sin(data.coords);
                 // let rotate = randomise(5);
@@ -139,10 +148,10 @@
                 });
 
                 if (
-                    data.posY >= marginBottom - 2 * data.size ||
-                    left > marginRight - 3 * data.left
+                    data.posY >= sizes.height - 2 * data.size ||
+                    left > sizes.width - 3 * data.left
                 ) {
-                    data.posX = randomise(marginRight - data.size);
+                    data.posX = randomise(sizes.width - data.size);
                     data.posY = 0;
                 }
 
