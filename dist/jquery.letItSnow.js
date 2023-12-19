@@ -10,7 +10,7 @@
 
         const DEFAULTS = {
             background: null,
-            quantity: "softly", // softly, less, medium or much
+            quantity: "smooth", // smooth, less, medium or much
             flake: {
                 html: "&#x2022;", // Snow Entity
                 minSize: 2, // Minimum Flake Size
@@ -39,7 +39,7 @@
         function getAmountOfSnowflakes() {
             let quantity;
             switch (setup.quantity) {
-                case "softly":
+                case "smooth":
                     quantity = 40;
                     break;
                 case "medium":

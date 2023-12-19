@@ -13,7 +13,7 @@ The number of flakes is determined by the window width. If the window is resized
 ```js
 let options = {
     background: null, // The background of the container. This property is set as css background.
-    quantity: "softly", // How many flakes should be produced? Possible values: softly, less, medium or much
+    quantity: "smooth", // How many flakes should be produced? Possible values: smooth, less, medium or much
     flake: {
         html: "&#x2022;", // Snow Entity
         minSize: 2, // Minimum Flake Size
