@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body class="h-100 d-flex justify-content-center align-items-center overflow-hidden">
+<h1 class="text-danger text-uppercase">Merry Christmas</h1>
+<script src="../vendor/components/jquery/jquery.min.js"></script>
+<script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../dist/jquery.letItSnow.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('body').letItSnow({
+            background: "fixed no-repeat center bottom url('img/winter-landscape.png')",
+            quantity: 'much',
+            flake: {
+                html: '<i class="bi bi-snow3"></i>'
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
