@@ -1,5 +1,3 @@
-![let it snow picture](demo/img/jquery_letItSnow.png)
-
 # jquery-letItSnow
 
 A small jQuery plugin to show your website with snowfall.  
@@ -8,6 +6,9 @@ of [Tracy Good](https://stackoverflow.com/users/17213191/tracy-good)
 ([Source](https://codepen.io/onlintool24/pen/GRMOBVo)).
 
 The number of flakes is determined by the window width. If the window is resized, the flakes are recalculated.
+
+![let it snow picture](demo/img/snowfall.gif)
+
 ## options
 
 ```js
