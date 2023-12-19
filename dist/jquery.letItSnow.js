@@ -63,6 +63,7 @@
                 $("<span>", {
                     "data-flake": i,
                     css: {
+                        opacity:0,
                         cursor: "default",
                         userSelect: "none",
                         position: "absolute",
@@ -127,6 +128,9 @@
                 });
             }
 
+            container.find(`[data-flake]`).animate({opacity: 1}, 2000);
+
+
             moveSnow();
         }
 
@@ -134,23 +138,19 @@
             const sizes = getContainerSizes();
             for (let i = 0; i <= amount; i++) {
                 const flake = container.find(`[data-flake='${i}']`);
-                let data = flake.data("setup");
+                const data = flake.data("setup");
                 data.coords += data.pos;
                 data.posY += data.sink;
 
-
                 let left = data.posX + data.left * Math.sin(data.coords);
-                // let rotate = randomise(5);
+
                 flake.css({
                     left: left + "px",
-                    top: data.posY + "px",
-                    // transform: 'rotate('+rotate+'deg)'
+                    top: data.posY + "px"
                 });
 
-                if (
-                    data.posY >= sizes.height - 2 * data.size ||
-                    left > sizes.width - 3 * data.left
-                ) {
+                const touchesTheGround = (data.posY + data.size) >= sizes.height;
+                if (touchesTheGround) {
                     data.posX = randomise(sizes.width - data.size);
                     data.posY = 0;
                 }
