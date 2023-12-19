@@ -85,9 +85,9 @@
             container.removeData("initSnowflakes");
         }
 
-        function getContainerSizes(){
-            const containerWidth = container.width() - 15;
-            const containerHeight = container.height() - 5;
+        function getContainerSizes() {
+            const containerWidth = container.outerWidth() - 15;
+            const containerHeight = container.outerHeight() - 5;
             return {
                 width: containerWidth,
                 height: containerHeight
@@ -102,7 +102,7 @@
                 const flake = container.find(`[data-flake='${i}']`);
                 const size = randomise(snowSize) + setup.flake.minSize;
                 const posX = randomise(sizes.width - size);
-                const posY = randomise(2 * sizes.height - sizes.width - 2 * size);
+                const posY = randomise(sizes.height - size);
 
                 let data = {
                     coords: 0,
