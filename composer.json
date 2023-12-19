@@ -3,6 +3,7 @@
   "description": "A small jQuery plugin to show your website with snowfall.",
   "minimum-stability": "stable",
   "license": "proprietary",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "thomas",
