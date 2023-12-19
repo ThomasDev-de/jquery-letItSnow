@@ -114,8 +114,7 @@
                     fontFamily: "inherit",
                     fontSize: size + "px",
                     color: setup.colors[randomise(setup.colors.length)],
-                    // zIndex: size,
-                    zIndex: 1,
+                    zIndex: size,
                     left: posX + "px",
                     top: posY + "px",
                 });
