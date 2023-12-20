@@ -8,6 +8,7 @@
             });
         }
 
+
         const DEFAULTS = {
             background: null,
             quantity: "smooth", // smooth, less, medium or much
@@ -21,12 +22,21 @@
             refresh: 50,
         };
 
+        const container = $(this).css("position", "relative");
         const setup = $.extend(true, DEFAULTS, options || {});
 
         let timeoutMove = null;
-        let timeoutResized = null;
+        let initObserver = false;
 
-        const container = $(this).css("position", "relative");
+        // If the parent element changes size, reinitialize the plugin
+        let observer = new ResizeObserver(() => {
+            if (initObserver) {
+                resizedFinished();
+            }
+            initObserver = true;
+        });
+
+
         if (setup.background)
             container.css({
                 background: setup.background,
@@ -38,8 +48,8 @@
         function getAmountOfSnowflakes() {
             let quantity;
             switch (setup.quantity) {
-                case "smooth":
-                    quantity = 40;
+                case "less":
+                    quantity = 10;
                     break;
                 case "medium":
                     quantity = 5;
@@ -48,7 +58,7 @@
                     quantity = 3;
                     break;
                 default:
-                    quantity = 10;
+                    quantity = 40;
             }
             return document.body.clientWidth / quantity;
         }
@@ -63,7 +73,7 @@
                 $("<span>", {
                     "data-flake": i,
                     css: {
-                        opacity:0,
+                        opacity: 0,
                         cursor: "default",
                         userSelect: "none",
                         position: "absolute",
@@ -78,9 +88,6 @@
         function destroy() {
             if (timeoutMove !== null) {
                 clearTimeout(timeoutMove);
-            }
-            if (timeoutResized !== null) {
-                clearTimeout(timeoutResized);
             }
             container.find("[data-flake]").remove();
             container.removeData("initSnowflakes");
@@ -180,10 +187,7 @@
         }
 
         function initEvents() {
-            window.onresize = function () {
-                clearTimeout(timeoutResized);
-                timeoutResized = setTimeout(resizedFinished, 100);
-            };
+            observer.observe(container.get(0))
         }
 
         return init();
