@@ -2,6 +2,7 @@
 
 (function ($) {
     $.fn.letItSnow = function (options = {}) {
+
         if ($(this).length > 1) {
             return $(this).each(function (i, e) {
                 return $(e).letItSnow(options);
@@ -36,7 +37,6 @@
             initObserver = true;
         });
 
-
         if (setup.background)
             container.css({
                 background: setup.background,
@@ -68,9 +68,11 @@
         }
 
         function buildFlakes() {
+            const dataContainer = container.data("containerSnowId");
             for (let i = 0; i <= amount; i++) {
                 let rotate = randomise(360);
                 $("<span>", {
+                    "data-container-id": dataContainer,
                     "data-flake": i,
                     css: {
                         opacity: 0,
@@ -89,7 +91,9 @@
             if (timeoutMove !== null) {
                 clearTimeout(timeoutMove);
             }
-            container.find("[data-flake]").remove();
+            const dataContainer = container.data("containerSnowId");
+
+            container.find(`[data-flake][data-container-id="${dataContainer}"]`).remove();
             container.removeData("initSnowflakes");
         }
 
@@ -105,9 +109,10 @@
         function initSnow() {
             const snowSize = setup.flake.maxSize - setup.flake.minSize;
             const sizes = getContainerSizes();
+            const dataContainer = container.data("containerSnowId");
 
             for (let i = 0; i <= amount; i++) {
-                const flake = container.find(`[data-flake='${i}']`);
+                const flake = container.find(`[data-flake='${i}'][data-container-id="${dataContainer}"]`);
                 const size = randomise(snowSize) + setup.flake.minSize;
                 const posX = randomise(sizes.width - size);
                 const posY = randomise(sizes.height - size);
@@ -135,7 +140,7 @@
                 });
             }
 
-            container.find(`[data-flake]`).animate({opacity: 1}, 2000);
+            container.find(`[data-flake][data-container-id="${dataContainer}"]`).animate({opacity: 1}, 2000);
 
 
             moveSnow();
@@ -143,8 +148,10 @@
 
         function moveSnow() {
             const sizes = getContainerSizes();
+            const dataContainer = container.data("containerSnowId");
+
             for (let i = 0; i <= amount; i++) {
-                const flake = container.find(`[data-flake='${i}']`);
+                const flake = container.find(`[data-flake='${i}'][data-container-id="${dataContainer}"]`);
                 const data = flake.data("setup");
                 data.coords += data.pos;
                 data.posY += data.sink;
@@ -168,8 +175,21 @@
             timeoutMove = setTimeout(moveSnow, setup.refresh);
         }
 
+        function generateGUID() {
+            const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let guid = '';
+            // Ensure the first character is a letter
+            guid += chars.charAt(Math.floor(Math.random() * 52)); // 0-51 for letters only
+            // Generate the rest of the GUID (e.g., 15 more characters for a total of 16)
+            for (let i = 1; i < 16; i++) {
+                guid += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return guid;
+        }
+
         function init() {
             if (!container.data("initSnowflakes")) {
+                container.data("containerSnowId", "snow_container_" + generateGUID());
                 amount = getAmountOfSnowflakes();
                 buildFlakes();
                 initSnow();

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +14,8 @@
         }
     </style>
 </head>
-<body class="h-100">
-<div class="container h-100 d-flex flex-column align-items-sm-stretch">
+<body style="height: 5000px" class="w-100">
+<div class="container d-flex flex-column align-items-start align-items-sm-stretch">
     <h1 class="text-center py-5">jQuery let it snow</h1>
     <p class="text-center">In the examples, the bootstrap-icons framework used the snowflake (bi bi-snow2) as an entity
         and the
@@ -48,6 +48,14 @@
                     html: '<i class="bi bi-snow3"></i>',
                 }
             });
+        });
+
+        $('body').letItSnow({
+            background: " rgb(255,100,100)",
+            quantity: 'much',
+            flake: {
+                html: '<i class="bi bi-snow2"></i>',
+            }
         });
     })
 
