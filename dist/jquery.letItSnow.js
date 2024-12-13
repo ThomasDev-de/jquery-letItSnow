@@ -120,9 +120,9 @@
                 let data = {
                     coords: 0,
                     size: size,
-                    left: Math.random() * 15,
-                    pos: 0.03 + Math.random() / 10,
-                    sink: (setup.speed * size) / 5,
+                    left: Math.random() * (20 - size), // Größere Flake: weniger horizontale Bewegung
+                    pos: 0.03 + Math.random() / 15,
+                    sink: setup.speed + (size / 5), // lineare Anpassung, sanfter Anstieg
                     posX: posX,
                     posY: posY,
                 };
@@ -132,16 +132,20 @@
                 flake.css({
                     pointerEvents: "none",
                     fontFamily: "inherit",
-                    fontSize: size + "px",
+                    fontSize: size + "px", // Schneeflockengröße
                     color: setup.colors[randomise(setup.colors.length)],
-                    zIndex: size,
+                    zIndex: Math.ceil(size) + 10, // Z-Index verstärkt Vordergrund-Hintergrund-Wirkung
+                    opacity: size < setup.flake.maxSize ? 0.8 : 1, // Kleinere Flocken transparenter
                     left: posX + "px",
                     top: posY + "px",
                 });
+
+                // Debug-Ausgabe, falls nötig
+                // console.log(`Flake ${i}: Size=${size}, Speed=${data.sink}, ZIndex=${Math.ceil(size)}`);
             }
 
-            container.find(`[data-flake][data-container-id="${dataContainer}"]`).animate({opacity: 1}, 2000);
-
+            // Animation: Schneeflocken erscheinen langsam (für neue Flocken)
+            container.find(`[data-flake][data-container-id="${dataContainer}"]`).animate({ opacity: 1 }, 2000);
 
             moveSnow();
         }

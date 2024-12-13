@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,11 +51,14 @@
         });
 
         $('body').letItSnow({
-            background: " rgb(255,100,100)",
+            background: " rgb(0,0,0)",
             quantity: 'much',
             flake: {
-                html: '<i class="bi bi-snow2"></i>',
-            }
+                html: '<i class="bi bi-snow3"></i>',
+                minSize: 1,
+                maxSize: 19,
+            },
+            refresh:10
         });
     })
 
